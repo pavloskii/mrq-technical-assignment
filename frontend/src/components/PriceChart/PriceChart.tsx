@@ -4,6 +4,7 @@ import { Line, LineChart, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { fetchPriceHistory, selectors } from '@/store/priceHistorySlice';
 import Loading from '@/components/Loading';
+
 type PriceChartProps = {
   symbolId: string | null;
 };

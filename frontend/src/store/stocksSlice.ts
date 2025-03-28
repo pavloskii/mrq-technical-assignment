@@ -62,19 +62,16 @@ const stocksSlice = createSlice({
       state.apiState.error = false;
       state.apiState.loading = false;
       Object.assign(state, newState);
-      // console.log('fulfilled', action);
     });
 
     builder.addCase(fetchAllStocks.rejected, (state, action) => {
       state.apiState.error = true;
       state.apiState.loading = false;
-      // console.log('rejected', action);
     });
 
     builder.addCase(fetchAllStocks.pending, (state, action) => {
       state.apiState.error = false;
       state.apiState.loading = true;
-      // console.log('pending', action);
     });
   }
 });

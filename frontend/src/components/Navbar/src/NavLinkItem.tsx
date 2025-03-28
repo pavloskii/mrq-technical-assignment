@@ -6,6 +6,7 @@ type NavLinkItemProps = {
   to: string;
   label: string;
 };
+
 const NavLinkItem = ({ to, label }: NavLinkItemProps) => {
   return (
     <li>

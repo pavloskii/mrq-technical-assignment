@@ -25,4 +25,5 @@ const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
     </div>
   );
 };
+
 export default SymbolCard;

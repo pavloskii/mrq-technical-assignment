@@ -1,5 +1,6 @@
 import './loading.css';
 import { memo } from 'react';
+
 const Loading = () => {
   return (
     <div className="loading">

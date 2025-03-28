@@ -1,6 +1,4 @@
-import React from 'react';
 import './highlightedSymbols.css';
-
 import PerformanceCard from '@/components/PerformanceCard';
 import Row from '@/components/Row';
 

@@ -13,4 +13,5 @@ const VolumeLabel = ({ volume, change }: TrendLabelProps) => {
   const arrow = change > 1 ? <UpArrow /> : <DownArrow />;
   return <ListItem Icon={arrow} label={volume.toString()} />;
 };
+
 export default memo(VolumeLabel);
