@@ -4,6 +4,10 @@
   margin: 10px; /* just for visibility, feel free to remove it */
 }
 
+.symbolCard__body {
+  padding: 6px;
+}
+
 .symbolCard__shake {
   animation: shake 0.62s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
