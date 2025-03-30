@@ -1,5 +1,5 @@
 import './cardHeader.css';
-import upTrend from '@/assets/up.png';
+import TrendIcon from './TrendIcon';
 
 type CardHeaderProps = {
   companyId: string;
@@ -9,8 +9,8 @@ type CardHeaderProps = {
 const CardHeader = ({ companyId, trend }: CardHeaderProps) => {
   return (
     <div className="cardHeader">
-      {companyId} - {trend}
-      <img className="cardHeader__trend-icon" src={upTrend} alt="Up trend" />
+      {companyId}
+      <TrendIcon trend={trend} />
     </div>
   );
 };

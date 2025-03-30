@@ -1,15 +1,7 @@
 .cardHeader {
   background-color: var(--colorDark);
   color: var(--colorWhite);
-  padding: 5px 10px;
+  padding: 0 6px;
   position: relative;
   border-radius: 8px 8px 0 0;
-}
-
-.cardHeader__trend-icon {
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  width: 40px;
-  height: 40px;
 }
