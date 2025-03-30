@@ -64,12 +64,12 @@ const stocksSlice = createSlice({
       Object.assign(state, newState);
     });
 
-    builder.addCase(fetchAllStocks.rejected, (state, action) => {
+    builder.addCase(fetchAllStocks.rejected, (state) => {
       state.apiState.error = true;
       state.apiState.loading = false;
     });
 
-    builder.addCase(fetchAllStocks.pending, (state, action) => {
+    builder.addCase(fetchAllStocks.pending, (state) => {
       state.apiState.error = false;
       state.apiState.loading = true;
     });
