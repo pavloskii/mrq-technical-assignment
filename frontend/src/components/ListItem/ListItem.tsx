@@ -1,8 +1,8 @@
-import React from 'react';
+import { memo, ReactNode } from 'react';
 import './listItem.css';
 
 type ListItemProps = {
-  Icon: React.ReactNode;
+  Icon: ReactNode;
   label: string;
   spacing?:
     | 'space-between'
@@ -12,7 +12,7 @@ type ListItemProps = {
     | 'flex-end'
     | 'center'
     | 'stretch'
-    | 'baseline'
+    | 'baseline';
 };
 
 const ListItem = ({ Icon, label, spacing }: ListItemProps) => {
@@ -24,4 +24,4 @@ const ListItem = ({ Icon, label, spacing }: ListItemProps) => {
   );
 };
 
-export default ListItem;
+export default memo(ListItem);

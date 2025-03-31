@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import './cardHeader.css';
 import TrendIcon from './TrendIcon';
 
@@ -15,4 +16,4 @@ const CardHeader = ({ companyId, trend }: CardHeaderProps) => {
   );
 };
 
-export default CardHeader;
+export default memo(CardHeader);

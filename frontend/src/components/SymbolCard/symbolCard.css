@@ -1,15 +1,23 @@
 .symbolCard {
   border-radius: 8px;
   background-color: var(--colorWhite);
-  margin: 10px; /* just for visibility, feel free to remove it */
+  margin: 10px;
+}
+
+.symbolCard--up {
+  box-shadow: 0 0 15px 3px rgba(0, 128, 0, 0.7);
+}
+
+.symbolCard--down {
+  box-shadow: 0 0 15px 3px rgba(255, 0, 0, 0.7);
+}
+
+.symbolCard--shake {
+  animation: shake 0.62s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 .symbolCard__body {
   padding: 6px;
-}
-
-.symbolCard__shake {
-  animation: shake 0.62s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
 @keyframes shake {
