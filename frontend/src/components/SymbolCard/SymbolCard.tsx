@@ -1,14 +1,11 @@
 import './symbolCard.css';
-import { ReactComponent as CompanyIcon } from '@/assets/company.svg';
-import { ReactComponent as IndustryIcon } from '@/assets/industry.svg';
-import { ReactComponent as MarketCapIcon } from '@/assets/market_cap.svg';
 import { useAppSelector } from '@/hooks/redux';
-import ListItem from '@/components/ListItem';
 import CardHeader from './src/CardHeader';
 import StockPrice from './src/StockPrice';
 import usePriceChangeInfo from './src/usePriceChangeInfo';
 import { clsx } from 'clsx';
 import { memo, useCallback } from 'react';
+import SymbolInfo from './src/SymbolInfo';
 
 type SymbolCardProps = {
   id: string;
@@ -17,7 +14,9 @@ type SymbolCardProps = {
 };
 
 const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
-  const { trend, companyName } = useAppSelector((state) => state.stocks.entities[id]);
+  const { trend, companyName, industry, marketCap } = useAppSelector(
+    (state) => state.stocks.entities[id]
+  );
   const changePercent = usePriceChangeInfo(price);
 
   const handleOnClick = useCallback(() => {
@@ -38,12 +37,7 @@ const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
 
       <div className="symbolCard__body">
         <StockPrice price={price} />
-
-        <div>
-          <ListItem Icon={<CompanyIcon />} label={companyName} spacing="space-between" />
-          <ListItem Icon={<IndustryIcon />} label={companyName} spacing="space-between" />
-          <ListItem Icon={<MarketCapIcon />} label={companyName} spacing="space-between" />
-        </div>
+        <SymbolInfo companyName={companyName} industry={industry} marketCap={marketCap} />
       </div>
     </div>
   );

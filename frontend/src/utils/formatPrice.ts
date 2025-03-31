@@ -1,4 +1,4 @@
-const formatSymbolPrice = (price: number): string => {
+const formatPrice = (price: number): string => {
   if (price >= 1_000_000_000_000) {
     return `$${(price / 1_000_000_000_000).toFixed(1)}T`;
   }
@@ -22,4 +22,4 @@ const formatSymbolPrice = (price: number): string => {
   return `$${price.toFixed(1)}`;
 };
 
-export default formatSymbolPrice;
+export default formatPrice;
