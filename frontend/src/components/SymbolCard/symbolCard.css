@@ -1,7 +1,6 @@
 .symbolCard {
   border-radius: 8px;
   background-color: var(--colorWhite);
-  margin: 10px;
 }
 
 .symbolCard--up {
