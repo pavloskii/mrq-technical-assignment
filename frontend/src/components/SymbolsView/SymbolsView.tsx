@@ -16,9 +16,7 @@ const SymbolsView = () => {
       <DesktopInfo />
 
       <div className="symbolsView__content">
-        <div className="symbolsView__cards">
-          <SymbolsGrid onSymbolClick={handleSymbolClick} />
-        </div>
+        <SymbolsGrid onSymbolClick={handleSymbolClick} />
 
         <div className="symbolsView__chart">
           <h3>PRICE HISTORY</h3>
