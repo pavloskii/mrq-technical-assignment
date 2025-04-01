@@ -6,16 +6,12 @@
 .symbolsView__content {
   display: grid;
   grid-template-columns: 1fr 400px;
-  gap: 6px;
-  padding: 12px;
+  gap: 8px;
+  padding: 16px 0;
 }
 
 @media (max-width: 1023px) {
   .symbolsView__content {
-    grid-template-columns: 1fr;
-  }
-
-  .symbolsView__cards {
     grid-template-columns: 1fr;
   }
 

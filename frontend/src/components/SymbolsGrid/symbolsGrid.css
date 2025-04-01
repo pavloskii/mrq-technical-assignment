@@ -1,0 +1,14 @@
+.symbolsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 16px;
+  background-color: #e2e2e2;
+  overflow-y: auto;
+  max-height: 500px;
+  scrollbar-width: none;
+}
+
+.symbolsGrid::-webkit-scrollbar {
+  display: none;
+}
