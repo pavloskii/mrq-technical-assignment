@@ -5,6 +5,7 @@
   padding: 20px;
   background-color: #e2e2e2;
   overflow-y: auto;
+  align-content: start;
   scrollbar-width: none;
 }
 
