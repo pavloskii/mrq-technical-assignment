@@ -1,6 +1,7 @@
 .stockPrice {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 16px;
 }
 
 .stockPrice__label {

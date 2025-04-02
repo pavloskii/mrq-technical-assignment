@@ -18,6 +18,7 @@ const SymbolCard = ({ id, onClick, price, scale }: SymbolCardProps) => {
   const { trend, companyName, industry, marketCap } = useAppSelector(
     (state) => state.stocks.entities[id]
   );
+  const showCardInfo = useAppSelector((state) => state.store.showCardInfo);
   const changePercent = usePriceChangeInfo(price);
 
   const handleOnClick = useCallback(() => {
@@ -40,7 +41,10 @@ const SymbolCard = ({ id, onClick, price, scale }: SymbolCardProps) => {
 
       <div className="symbolCard__body">
         <StockPrice price={price} />
-        <SymbolInfo companyName={companyName} industry={industry} marketCap={marketCap} />
+
+        {showCardInfo && (
+          <SymbolInfo companyName={companyName} industry={industry} marketCap={marketCap} />
+        )}
       </div>
     </div>
   );
