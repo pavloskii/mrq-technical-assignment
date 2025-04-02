@@ -11,9 +11,10 @@ type SymbolCardProps = {
   id: string;
   onClick: (symbolId: string) => void;
   price: number;
+  scale: number;
 };
 
-const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
+const SymbolCard = ({ id, onClick, price, scale }: SymbolCardProps) => {
   const { trend, companyName, industry, marketCap } = useAppSelector(
     (state) => state.stocks.entities[id]
   );
@@ -30,8 +31,10 @@ const SymbolCard = ({ id, onClick, price }: SymbolCardProps) => {
         'symbolCard',
         !!changePercent && changePercent > 0 && 'symbolCard--up',
         !!changePercent && changePercent < 0 && 'symbolCard--down',
-        !!changePercent && Math.abs(changePercent) > 25 && 'symbolCard--shake'
+        !!changePercent && Math.abs(changePercent) > 25 && 'symbolCard--shake',
+        scale > 1 && 'symbolCard--active'
       )}
+      style={{ transform: `scale(${scale})` }}
     >
       <CardHeader companyId={id} trend={trend} />
 

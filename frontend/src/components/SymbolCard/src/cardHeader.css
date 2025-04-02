@@ -2,6 +2,5 @@
   background-color: var(--colorDark);
   color: var(--colorWhite);
   padding: 0 6px;
-  position: relative;
   border-radius: 8px 8px 0 0;
 }
