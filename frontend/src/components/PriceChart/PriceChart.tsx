@@ -13,7 +13,11 @@ const PriceChart = ({ symbolId }: PriceChartProps) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (symbolId) {
-      dispatch(fetchPriceHistory(symbolId));
+      const promise = dispatch(fetchPriceHistory(symbolId));
+
+      return () => {
+        promise.abort();
+      };
     }
   }, [dispatch, symbolId]);
 
