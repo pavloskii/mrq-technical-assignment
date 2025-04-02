@@ -6,7 +6,8 @@ import usePriceChangeInfo from './src/usePriceChangeInfo';
 import { clsx } from 'clsx';
 import { memo, useCallback } from 'react';
 import SymbolInfo from './src/SymbolInfo';
-import { selectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
+import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
+import { selectors as stocksSelectors } from '@/store/stocksSlice';
 
 type SymbolCardProps = {
   id: string;
@@ -15,11 +16,11 @@ type SymbolCardProps = {
 };
 
 const SymbolCard = ({ id, price, scale }: SymbolCardProps) => {
-  const { trend, companyName, industry, marketCap } = useAppSelector(
-    (state) => state.stocks.entities[id]
-  );
   const dispatch = useAppDispatch();
-  const showCardInfo = useAppSelector(selectors.selectShowCardInfo);
+  const { trend, companyName, industry, marketCap } = useAppSelector(
+    stocksSelectors.selectStockById(id)
+  );
+  const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
   const changePercent = usePriceChangeInfo(price);
 
   const handleOnClick = useCallback(() => {

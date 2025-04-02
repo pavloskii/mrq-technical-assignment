@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/store/index';
 
 type Stock = {
@@ -44,6 +44,7 @@ export const fetchAllStocks = createAsyncThunk(
 const selectStockIds = (state: RootState) => state.stocks.ids;
 const selectStocks = (state: RootState) => state.stocks.entities;
 const apiState = (state: RootState) => state.stocks.apiState;
+const selectStockById = (id: string) => createSelector(selectStocks, (entities) => entities[id]);
 
 const stocksSlice = createSlice({
   name: 'stocks',
@@ -79,7 +80,8 @@ const stocksSlice = createSlice({
 const selectors = {
   selectStockIds,
   selectStocks,
-  apiState
+  apiState,
+  selectStockById
 };
 
 export default stocksSlice;
