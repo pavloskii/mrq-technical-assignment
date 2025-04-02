@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  padding: 16px;
+  padding: 20px;
   background-color: #e2e2e2;
   overflow-y: auto;
   scrollbar-width: none;

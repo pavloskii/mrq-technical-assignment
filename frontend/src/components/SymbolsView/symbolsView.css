@@ -1,6 +1,7 @@
 .symbolsView {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   overflow: hidden;
 }
 
@@ -13,7 +14,7 @@
   overflow: hidden;
 }
 
-@media (max-width: 1023px) {
+@media (width < 1024px) {
   .symbolsView__content {
     grid-template-columns: 1fr;
   }
