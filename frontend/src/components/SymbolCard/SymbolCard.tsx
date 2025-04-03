@@ -29,6 +29,7 @@ const SymbolCard = ({ id, price, scale }: SymbolCardProps) => {
 
   return (
     <div
+      key={price}
       onClick={handleOnClick}
       className={clsx(
         'symbolCard',
