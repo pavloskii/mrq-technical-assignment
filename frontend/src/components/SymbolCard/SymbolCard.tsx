@@ -6,7 +6,6 @@ import usePriceChangePercent from './src/usePriceChangePercent';
 import { memo, useCallback } from 'react';
 import SymbolInfo from './src/SymbolInfo';
 import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
-import { selectors as stocksSelectors } from '@/store/stocksSlice';
 import combineClasses from '@/utils/combineClasses';
 import { type Stock } from '@/services/stocks';
 
