@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import './cardHeader.css';
-import TrendIcon from './TrendIcon';
+import TrendMarker from './TrendMarker';
 
 type CardHeaderProps = {
   companyId: string;
@@ -11,7 +11,7 @@ const CardHeader = ({ companyId, trend }: CardHeaderProps) => {
   return (
     <div className="cardHeader">
       {companyId}
-      <TrendIcon trend={trend} />
+      <TrendMarker trend={trend} />
     </div>
   );
 };

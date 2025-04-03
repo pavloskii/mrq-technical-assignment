@@ -2,7 +2,7 @@ import './symbolCard.css';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import CardHeader from './src/CardHeader';
 import StockPrice from './src/StockPrice';
-import usePriceChangeInfo from './src/usePriceChangeInfo';
+import usePriceChangePercent from './src/usePriceChangePercent';
 import { clsx } from 'clsx';
 import { memo, useCallback } from 'react';
 import SymbolInfo from './src/SymbolInfo';
@@ -21,7 +21,7 @@ const SymbolCard = ({ id, price, scale }: SymbolCardProps) => {
     stocksSelectors.selectStockById(id)
   );
   const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
-  const changePercent = usePriceChangeInfo(price);
+  const changePercent = usePriceChangePercent(price);
 
   const handleOnClick = useCallback(() => {
     dispatch(setActiveSymbol(id));
