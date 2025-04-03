@@ -19,14 +19,9 @@ const SymbolsGrid = ({ activeSymbol }: SymbolsGridProps) => {
 
   return (
     <div className="symbolsGrid">
-      {stockSymbols.map((id) => {
-        let scale = 1;
-        if (activeSymbol !== null) {
-          scale = id === activeSymbol ? 1.05 : 0.95;
-        }
-
-        return <SymbolCard price={prices[id]} key={id} id={id} scale={scale} />;
-      })}
+      {stockSymbols.map((id) => (
+        <SymbolCard price={prices[id]} key={id} id={id} activeSymbol={activeSymbol} />
+      ))}
     </div>
   );
 };

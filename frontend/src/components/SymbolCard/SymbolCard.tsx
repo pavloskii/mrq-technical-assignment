@@ -3,25 +3,28 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import CardHeader from './src/CardHeader';
 import StockPrice from './src/StockPrice';
 import usePriceChangePercent from './src/usePriceChangePercent';
-import { clsx } from 'clsx';
 import { memo, useCallback } from 'react';
 import SymbolInfo from './src/SymbolInfo';
 import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
 import { selectors as stocksSelectors } from '@/store/stocksSlice';
+import combineClasses from '@/utils/combineClasses';
 
 type SymbolCardProps = {
   id: string;
   price: number;
-  scale: number;
+  activeSymbol: string | null;
 };
 
-const SymbolCard = ({ id, price, scale }: SymbolCardProps) => {
+const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
   const dispatch = useAppDispatch();
   const { trend, companyName, industry, marketCap } = useAppSelector(
     stocksSelectors.selectStockById(id)
   );
   const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
   const changePercent = usePriceChangePercent(price);
+  const isActive = activeSymbol === id;
+  const isOtherActive = !isActive && activeSymbol !== null;
+  const priceRecentlyChanged = changePercent !== null;
 
   const handleOnClick = useCallback(() => {
     dispatch(setActiveSymbol(id));
@@ -31,14 +34,15 @@ const SymbolCard = ({ id, price, scale }: SymbolCardProps) => {
     <div
       key={price}
       onClick={handleOnClick}
-      className={clsx(
+      className={combineClasses(
         'symbolCard',
-        !!changePercent && changePercent > 0 && 'symbolCard--up',
-        !!changePercent && changePercent < 0 && 'symbolCard--down',
-        !!changePercent && Math.abs(changePercent) > 25 && 'symbolCard--shake',
-        scale > 1 && 'symbolCard--active'
+        priceRecentlyChanged && changePercent > 0 && 'symbolCard--greenGlow',
+        priceRecentlyChanged && changePercent < 0 && 'symbolCard--redGlow',
+        !priceRecentlyChanged && isActive && 'symbolCard--blackGlow',
+        priceRecentlyChanged && Math.abs(changePercent) > 25 && 'symbolCard--shake',
+        isActive && 'symbolCard--grow',
+        isOtherActive && 'symbolCard--shrink'
       )}
-      style={{ transform: `scale(${scale})` }}
     >
       <CardHeader companyId={id} trend={trend} />
 
