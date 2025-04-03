@@ -8,27 +8,26 @@ import SymbolInfo from './src/SymbolInfo';
 import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
 import { selectors as stocksSelectors } from '@/store/stocksSlice';
 import combineClasses from '@/utils/combineClasses';
+import { type Stock } from '@/services/stocks';
 
 type SymbolCardProps = {
-  id: string;
+  stock: Stock;
   price: number;
   activeSymbol: string | null;
 };
 
-const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
+const SymbolCard = ({ stock, price, activeSymbol }: SymbolCardProps) => {
   const dispatch = useAppDispatch();
-  const { trend, companyName, industry, marketCap } = useAppSelector(
-    stocksSelectors.selectStockById(id)
-  );
+  const { trend, companyName, industry, marketCap, symbol } = stock;
   const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
   const changePercent = usePriceChangePercent(price);
-  const isActive = activeSymbol === id;
+  const isActive = activeSymbol === symbol;
   const isOtherActive = !isActive && activeSymbol !== null;
   const priceRecentlyChanged = changePercent !== null;
 
   const handleOnClick = useCallback(() => {
-    dispatch(setActiveSymbol(id));
-  }, [dispatch, id]);
+    dispatch(setActiveSymbol(symbol));
+  }, [dispatch, symbol]);
 
   return (
     <div
@@ -44,7 +43,7 @@ const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
         isOtherActive && 'symbolCard--shrink'
       )}
     >
-      <CardHeader companyId={id} trend={trend} />
+      <CardHeader companyId={symbol} trend={trend} />
 
       <div className="symbolCard__body">
         <StockPrice price={price} />
