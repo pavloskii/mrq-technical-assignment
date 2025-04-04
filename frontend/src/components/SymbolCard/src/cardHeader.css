@@ -1,0 +1,6 @@
+.cardHeader {
+  background-color: var(--colorDark);
+  color: var(--colorWhite);
+  padding: 2px 8px;
+  border-radius: 6px 6px 0 0;
+}

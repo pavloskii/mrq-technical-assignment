@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/store/index';
 
 type Stock = {
@@ -44,6 +44,7 @@ export const fetchAllStocks = createAsyncThunk(
 const selectStockIds = (state: RootState) => state.stocks.ids;
 const selectStocks = (state: RootState) => state.stocks.entities;
 const apiState = (state: RootState) => state.stocks.apiState;
+const selectStockById = (id: string) => createSelector(selectStocks, (entities) => entities[id]);
 
 const stocksSlice = createSlice({
   name: 'stocks',
@@ -62,19 +63,16 @@ const stocksSlice = createSlice({
       state.apiState.error = false;
       state.apiState.loading = false;
       Object.assign(state, newState);
-      // console.log('fulfilled', action);
     });
 
-    builder.addCase(fetchAllStocks.rejected, (state, action) => {
+    builder.addCase(fetchAllStocks.rejected, (state) => {
       state.apiState.error = true;
       state.apiState.loading = false;
-      // console.log('rejected', action);
     });
 
-    builder.addCase(fetchAllStocks.pending, (state, action) => {
+    builder.addCase(fetchAllStocks.pending, (state) => {
       state.apiState.error = false;
       state.apiState.loading = true;
-      // console.log('pending', action);
     });
   }
 });
@@ -82,7 +80,8 @@ const stocksSlice = createSlice({
 const selectors = {
   selectStockIds,
   selectStocks,
-  apiState
+  apiState,
+  selectStockById
 };
 
 export default stocksSlice;

@@ -21,4 +21,5 @@ const PerformanceInfo = ({ label, change }: PerformanceCardProps) => {
     </div>
   );
 };
+
 export default memo(PerformanceInfo);

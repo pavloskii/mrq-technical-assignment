@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { RootState } from '.';
 
 interface StoreState {
   activeSymbol: string | null;
@@ -6,9 +7,12 @@ interface StoreState {
 }
 
 const initialState: StoreState = {
-  activeSymbol: '',
+  activeSymbol: null,
   showCardInfo: true
 };
+
+const selectShowCardInfo = (state: { store: StoreState }) => state.store.showCardInfo;
+const selectActiveSymbol = (state: RootState) => state.store.activeSymbol;
 
 export const dashboardOptionsSlice = createSlice({
   name: 'store',
@@ -16,12 +20,19 @@ export const dashboardOptionsSlice = createSlice({
   reducers: {
     toggleShowCardInfo: (state) => {
       state.showCardInfo = !state.showCardInfo;
+    },
+    setActiveSymbol: (state, action: PayloadAction<string>) => {
+      state.activeSymbol = state.activeSymbol === action.payload ? null : action.payload;
     }
   }
 });
 
-export const { toggleShowCardInfo } = dashboardOptionsSlice.actions;
+export const { toggleShowCardInfo, setActiveSymbol } = dashboardOptionsSlice.actions;
 
-export const selectShowCardInfo = (state: { store: StoreState }) => state.store.showCardInfo;
+const selectors = {
+  selectShowCardInfo,
+  selectActiveSymbol
+};
 
 export default dashboardOptionsSlice.reducer;
+export { selectors };

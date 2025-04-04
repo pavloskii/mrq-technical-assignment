@@ -4,6 +4,7 @@ import { Line, LineChart, XAxis, YAxis, ResponsiveContainer } from 'recharts';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { fetchPriceHistory, selectors } from '@/store/priceHistorySlice';
 import Loading from '@/components/Loading';
+
 type PriceChartProps = {
   symbolId: string | null;
 };
@@ -12,7 +13,11 @@ const PriceChart = ({ symbolId }: PriceChartProps) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (symbolId) {
-      dispatch(fetchPriceHistory(symbolId));
+      const promise = dispatch(fetchPriceHistory(symbolId));
+
+      return () => {
+        promise.abort();
+      };
     }
   }, [dispatch, symbolId]);
 

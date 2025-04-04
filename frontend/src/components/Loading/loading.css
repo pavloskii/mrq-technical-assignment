@@ -19,6 +19,7 @@
   animation: dot-pulse 1.5s infinite linear;
   animation-delay: 0.25s;
 }
+
 .loading__pulse::before,
 .loading__pulse::after {
   content: '';
@@ -31,11 +32,13 @@
   background-color: var(--colorDark);
   color: var(--colorDark);
 }
+
 .loading__pulse::before {
   box-shadow: 9984px 0 0 -5px;
   animation: dot-pulse-before 1.5s infinite linear;
   animation-delay: 0s;
 }
+
 .loading__pulse::after {
   box-shadow: 10014px 0 0 -5px;
   animation: dot-pulse-after 1.5s infinite linear;
@@ -54,6 +57,7 @@
     box-shadow: 9984px 0 0 -5px;
   }
 }
+
 @keyframes dot-pulse {
   0% {
     box-shadow: 9999px 0 0 -5px;
@@ -66,6 +70,7 @@
     box-shadow: 9999px 0 0 -5px;
   }
 }
+
 @keyframes dot-pulse-after {
   0% {
     box-shadow: 10014px 0 0 -5px;

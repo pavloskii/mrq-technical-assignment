@@ -1,6 +1,4 @@
-import React from 'react';
 import './topHeadlines.css';
-
 import Row from '@/components/Row';
 import TopHeadline from './src/TopHeadline';
 import { stockTypes } from '@/lib/types';
@@ -32,7 +30,7 @@ const data: Headline[] = [
 const TopHeadlines = () => {
   return (
     <Row spacing="md" className="topHeadlines">
-      {data.map(({ headline, bias }, index) => {
+      {data.map(({ headline, bias }) => {
         return <TopHeadline key={headline} bias={bias} headline={headline} />;
       })}
     </Row>

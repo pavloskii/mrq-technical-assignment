@@ -1,0 +1,17 @@
+.stockPrice {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+}
+
+.stockPrice__label {
+  font-weight: 500;
+  font-size: 0.75em;
+  align-self: flex-end;
+}
+
+.stockPrice__value {
+  font-weight: bold;
+  font-size: 1.5em;
+  align-self: flex-start;
+}
