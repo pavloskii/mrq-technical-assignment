@@ -36,12 +36,11 @@ const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
       onClick={handleOnClick}
       className={combineClasses(
         'symbolCard',
-        priceRecentlyChanged && changePercent > 0 && 'symbolCard--greenGlow',
-        priceRecentlyChanged && changePercent < 0 && 'symbolCard--redGlow',
-        !priceRecentlyChanged && isActive && 'symbolCard--blackGlow',
-        priceRecentlyChanged && Math.abs(changePercent) > 25 && 'symbolCard--shake',
-        isActive && 'symbolCard--grow',
-        isOtherActive && 'symbolCard--shrink'
+        isActive && 'symbolCard--active',
+        isOtherActive && 'symbolCard--shrink',
+        priceRecentlyChanged && changePercent > 0 && 'symbolCard--priceUp',
+        priceRecentlyChanged && changePercent < 0 && 'symbolCard--priceDown',
+        priceRecentlyChanged && Math.abs(changePercent) > 25 && 'symbolCard--shake'
       )}
     >
       <CardHeader companyId={id} trend={trend} />
