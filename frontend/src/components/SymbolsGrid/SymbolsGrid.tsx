@@ -1,8 +1,8 @@
 import './symbolsGrid.css';
-import { useCallback, useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { fetchAllStocks, selectors } from '@/store/stocksSlice';
+import { useAppSelector } from '@/hooks/redux';
 import SymbolCard from '../SymbolCard';
+import { useGetAllStocksQuery } from '@/services/stocks';
+import { useCallback } from 'react';
 import { Scale } from '../SymbolCard/SymbolCard';
 
 type SymbolsGridProps = {
@@ -10,9 +10,8 @@ type SymbolsGridProps = {
 };
 
 const SymbolsGrid = ({ activeSymbol }: SymbolsGridProps) => {
-  const stockSymbols = useAppSelector(selectors.selectStockIds);
+  const { data: stocks = [] } = useGetAllStocksQuery();
   const prices = useAppSelector((state) => state.prices);
-  const dispatch = useAppDispatch();
 
   const getCardScale = useCallback(
     (symbol: string): Scale => {
@@ -23,15 +22,16 @@ const SymbolsGrid = ({ activeSymbol }: SymbolsGridProps) => {
     [activeSymbol]
   );
 
-  useEffect(() => {
-    dispatch(fetchAllStocks());
-  }, [dispatch]);
-
   return (
     <div className="symbolsGrid">
-      {stockSymbols.map((id) => {
-        return <SymbolCard price={prices[id]} key={id} id={id} scale={getCardScale(id)} />;
-      })}
+      {stocks.map((stock) => (
+        <SymbolCard
+          price={prices[stock.symbol]}
+          key={stock.symbol}
+          stock={stock}
+          scale={getCardScale(stock.symbol)}
+        />
+      ))}
     </div>
   );
 };

@@ -2,21 +2,20 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import pricesSlice from './pricesSlice';
 import thunkMiddleware from 'redux-thunk';
-import stocksSlice from '@/store/stocksSlice';
-import priceHistorySlice from '@/store/priceHistorySlice';
 import { dashboardOptionsSlice } from '@/store/dashboardOptionsSlice';
+import { stocksApi } from '@/services/stocks';
 
 export const store = configureStore({
   reducer: {
     // Add the generated reducer as a specific top-level slice
     [pricesSlice.name]: pricesSlice.reducer,
-    [stocksSlice.name]: stocksSlice.reducer,
-    [priceHistorySlice.name]: priceHistorySlice.reducer,
+    [stocksApi.reducerPath]: stocksApi.reducer,
     [dashboardOptionsSlice.name]: dashboardOptionsSlice.reducer
   },
   // Adding the api middleware enables caching, invalidation, polling,
   // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([thunkMiddleware])
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([thunkMiddleware, stocksApi.middleware])
 });
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
