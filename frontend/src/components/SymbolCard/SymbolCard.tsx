@@ -6,20 +6,28 @@ import usePriceChangePercent from './src/usePriceChangePercent';
 import { memo, useCallback } from 'react';
 import SymbolInfo from './src/SymbolInfo';
 import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
-import { selectors as stocksSelectors } from '@/store/stocksSlice';
 import combineClasses from '@/utils/combineClasses';
 
 type SymbolCardProps = {
   id: string;
   price: number;
+  companyName: string;
+  industry: string;
+  marketCap: number;
+  trend: 'UP' | 'DOWN' | null;
   activeSymbol: string | null;
 };
 
-const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
+const SymbolCard = ({
+  id,
+  price,
+  activeSymbol,
+  companyName,
+  industry,
+  marketCap,
+  trend
+}: SymbolCardProps) => {
   const dispatch = useAppDispatch();
-  const { trend, companyName, industry, marketCap } = useAppSelector(
-    stocksSelectors.selectStockById(id)
-  );
   const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
   const changePercent = usePriceChangePercent(price);
   const isActive = activeSymbol === id;

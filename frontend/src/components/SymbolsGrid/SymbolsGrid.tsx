@@ -1,26 +1,30 @@
 import './symbolsGrid.css';
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { fetchAllStocks, selectors } from '@/store/stocksSlice';
+import { useAppSelector } from '@/hooks/redux';
 import SymbolCard from '../SymbolCard';
+import { useGetAllStocksQuery } from '@/services/stocks';
+import { useEffect } from 'react';
 
 type SymbolsGridProps = {
   activeSymbol: null | string;
 };
 
 const SymbolsGrid = ({ activeSymbol }: SymbolsGridProps) => {
-  const stockSymbols = useAppSelector(selectors.selectStockIds);
+  const { data: stocks = [] } = useGetAllStocksQuery();
   const prices = useAppSelector((state) => state.prices);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchAllStocks());
-  }, [dispatch]);
-
+  useEffect(() => console.log('Updated' + stocks[0]), [stocks]);
   return (
     <div className="symbolsGrid">
-      {stockSymbols.map((id) => (
-        <SymbolCard price={prices[id]} key={id} id={id} activeSymbol={activeSymbol} />
+      {stocks.map((stock) => (
+        <SymbolCard
+          price={prices[stock.symbol]}
+          key={stock.symbol}
+          id={stock.symbol}
+          activeSymbol={activeSymbol}
+          companyName={stock.companyName}
+          industry={stock.industry}
+          marketCap={stock.marketCap}
+          trend={stock.trend}
+        />
       ))}
     </div>
   );

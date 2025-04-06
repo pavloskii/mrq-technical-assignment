@@ -1,37 +1,25 @@
-import { useEffect } from 'react';
 import './priceChart.css';
 import { Line, LineChart, XAxis, YAxis, ResponsiveContainer } from 'recharts';
-import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import { fetchPriceHistory, selectors } from '@/store/priceHistorySlice';
 import Loading from '@/components/Loading';
+import { useGetPriceHistoryQuery } from '@/services/stocks';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
 
 type PriceChartProps = {
   symbolId: string | null;
 };
 
 const PriceChart = ({ symbolId }: PriceChartProps) => {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (symbolId) {
-      const promise = dispatch(fetchPriceHistory(symbolId));
+  const { data: priceHistory, error, isFetching } = useGetPriceHistoryQuery(symbolId ?? skipToken);
+  const data = priceHistory?.history || [];
+  const symbolInfo = priceHistory?.symbol || [];
 
-      return () => {
-        promise.abort();
-      };
-    }
-  }, [dispatch, symbolId]);
-
-  const apiState = useAppSelector(selectors.apiState);
-  const data = useAppSelector(selectors.selectPriceHistory);
-  const symbolInfo = useAppSelector(selectors.selectSymbolInfo);
-
-  if (apiState.loading && symbolId !== null)
+  if (isFetching && symbolId !== null)
     return (
       <div className="priceChart">
         <Loading />
       </div>
     );
-  if (apiState.error) return <div className="priceChart">Failed to get price history!</div>;
+  if (error) return <div className="priceChart">Failed to get price history!</div>;
   if (!symbolId) return <div className="priceChart">Select stock</div>;
   return (
     <div className="priceChart">
