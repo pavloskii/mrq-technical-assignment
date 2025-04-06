@@ -2,12 +2,6 @@
   border-radius: 4px;
   background-color: var(--colorWhite);
   transition: transform 0.3s ease;
-  transform: scale(1);
-}
-
-.symbolCard--active {
-  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.7);
-  transform: scale(1.02);
 }
 
 .symbolCard--priceUp {
@@ -22,8 +16,17 @@
   animation: shake 0.62s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-.symbolCard--shrink {
+.symbolCard--small {
   transform: scale(0.98);
+}
+
+.symbolCard--medium {
+  transform: scale(1);
+}
+
+.symbolCard--large {
+  transform: scale(1);
+  box-shadow: 0 0 15px 3px rgba(0, 0, 0, 0.7);
 }
 
 .symbolCard__body {

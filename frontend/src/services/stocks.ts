@@ -33,3 +33,4 @@ export const stocksApi = createApi({
 });
 
 export const { useGetAllStocksQuery, useGetPriceHistoryQuery } = stocksApi;
+export type { Stock };

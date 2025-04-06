@@ -7,31 +7,21 @@ import { memo, useCallback } from 'react';
 import SymbolInfo from './src/SymbolInfo';
 import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboardOptionsSlice';
 import combineClasses from '@/utils/combineClasses';
+import { Stock } from '@/services/stocks';
+
+type Scale = 'small' | 'medium' | 'large';
 
 type SymbolCardProps = {
-  id: string;
   price: number;
-  companyName: string;
-  industry: string;
-  marketCap: number;
-  trend: 'UP' | 'DOWN' | null;
-  activeSymbol: string | null;
+  stock: Exclude<Stock, 'exchange'>;
+  scale?: Scale;
 };
 
-const SymbolCard = ({
-  id,
-  price,
-  activeSymbol,
-  companyName,
-  industry,
-  marketCap,
-  trend
-}: SymbolCardProps) => {
+const SymbolCard = ({ price, stock, scale = 'medium' }: SymbolCardProps) => {
+  const { symbol: id, companyName, industry, marketCap, trend } = stock;
   const dispatch = useAppDispatch();
   const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
   const changePercent = usePriceChangePercent(price);
-  const isActive = activeSymbol === id;
-  const isOtherActive = !isActive && activeSymbol !== null;
   const priceRecentlyChanged = changePercent !== null;
 
   const handleOnClick = useCallback(() => {
@@ -44,8 +34,7 @@ const SymbolCard = ({
       onClick={handleOnClick}
       className={combineClasses(
         'symbolCard',
-        isActive && 'symbolCard--active',
-        isOtherActive && 'symbolCard--shrink',
+        `symbolCard--${scale}`,
         priceRecentlyChanged && changePercent > 0 && 'symbolCard--priceUp',
         priceRecentlyChanged && changePercent < 0 && 'symbolCard--priceDown',
         priceRecentlyChanged && Math.abs(changePercent) > 25 && 'symbolCard--shake'
@@ -65,3 +54,4 @@ const SymbolCard = ({
 };
 
 export default memo(SymbolCard);
+export type { Scale };
