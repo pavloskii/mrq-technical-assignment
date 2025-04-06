@@ -1,4 +1,4 @@
-export const combineClasses = (...classes: (string | false | null | undefined)[]): string => {
+const combineClasses = (...classes: (string | false | null | undefined)[]): string => {
   return classes.filter(Boolean).join(' ');
 };
 

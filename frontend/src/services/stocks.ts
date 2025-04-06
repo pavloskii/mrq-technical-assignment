@@ -4,7 +4,7 @@ export const stocksApi = createApi({
   reducerPath: 'stocksApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3100/api/' }),
   endpoints: (builder) => ({
-    getAllStocks: builder.query<any, string>({
+    getAllStocks: builder.query<unknown, string>({
       query: () => `stocks`
     })
   })
