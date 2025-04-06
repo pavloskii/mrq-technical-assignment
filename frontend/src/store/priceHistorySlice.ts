@@ -65,7 +65,7 @@ const priceHistorySlice = createSlice({
       }
     });
 
-    builder.addCase(fetchPriceHistory.pending, (state, action) => {
+    builder.addCase(fetchPriceHistory.pending, (state) => {
       state.apiState.error = false;
       state.apiState.loading = true;
     });

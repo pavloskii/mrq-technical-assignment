@@ -1,5 +1,4 @@
-import { memo } from 'react';
-import type { ReactNode } from 'react';
+import { memo, type ReactNode } from 'react';
 import './row.css';
 
 type RowProps = {
@@ -23,4 +22,5 @@ const Row = ({ spacing = 'xs', className, children }: RowProps) => {
     </div>
   );
 };
+
 export default memo(Row);

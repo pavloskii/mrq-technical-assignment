@@ -1,0 +1,26 @@
+.symbolsView {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.symbolsView__content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 12px;
+  padding: 12px 0 8px 0;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+@media (width < 1024px) {
+  .symbolsView__content {
+    grid-template-columns: 1fr;
+  }
+
+  .symbolsView__chart {
+    order: -1;
+    padding: 0 12px;
+  }
+}

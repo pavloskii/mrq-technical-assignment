@@ -6,6 +6,6 @@
   align-items: center;
 }
 
-.toggleCardInfo input[type='checkbox'] {
+.toggleCardInfo__checkbox {
   accent-color: var(--colorPrimary);
 }
