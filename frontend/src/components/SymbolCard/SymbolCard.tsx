@@ -9,21 +9,21 @@ import { selectors as optionsSelectors, setActiveSymbol } from '@/store/dashboar
 import { selectors as stocksSelectors } from '@/store/stocksSlice';
 import combineClasses from '@/utils/combineClasses';
 
+type Scale = 'small' | 'medium' | 'large';
+
 type SymbolCardProps = {
   id: string;
   price: number;
-  activeSymbol: string | null;
+  scale?: Scale;
 };
 
-const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
+const SymbolCard = ({ id, price, scale = 'medium' }: SymbolCardProps) => {
   const dispatch = useAppDispatch();
   const { trend, companyName, industry, marketCap } = useAppSelector(
     stocksSelectors.selectStockById(id)
   );
   const showCardInfo = useAppSelector(optionsSelectors.selectShowCardInfo);
   const changePercent = usePriceChangePercent(price);
-  const isActive = activeSymbol === id;
-  const isOtherActive = !isActive && activeSymbol !== null;
   const priceRecentlyChanged = changePercent !== null;
 
   const handleOnClick = useCallback(() => {
@@ -36,8 +36,7 @@ const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
       onClick={handleOnClick}
       className={combineClasses(
         'symbolCard',
-        isActive && 'symbolCard--active',
-        isOtherActive && 'symbolCard--shrink',
+        `symbolCard--${scale}`,
         priceRecentlyChanged && changePercent > 0 && 'symbolCard--priceUp',
         priceRecentlyChanged && changePercent < 0 && 'symbolCard--priceDown',
         priceRecentlyChanged && Math.abs(changePercent) > 25 && 'symbolCard--shake'
@@ -57,3 +56,4 @@ const SymbolCard = ({ id, price, activeSymbol }: SymbolCardProps) => {
 };
 
 export default memo(SymbolCard);
+export type { Scale };
